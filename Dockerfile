@@ -33,7 +33,7 @@ COPY src/inventory.yaml /etc/ansible/inventory.yaml
 RUN mkdir /ansible
 WORKDIR /ansible
 
-COPY src/requirements.yaml /requirements.yaml
+COPY src/requirements.yaml requirements.yaml
 RUN ansible-galaxy install -r requirements.yaml
 
 # copy builtins
