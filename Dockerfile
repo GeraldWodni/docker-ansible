@@ -4,9 +4,17 @@ FROM ${REG_HOSTNAME}/${REG_FOLDER}/alpine:3.15
 MAINTAINER Gerald Wodni <gerald.wodni@gmail.com>
 
 # install packages
-RUN apk update && \
-    apk add ansible python3 tar \
+RUN apk update && apk add \
+    ansible \
+    py3-pip \
+    python3 \
+    tar \
+    vim \
     rm -rf /var/cache/apk/*
+
+RUN pip3 install \
+    openshift \
+    pyyaml
 
 # ansible user
 RUN addgroup -S ansible && adduser -S ansible -G ansible
