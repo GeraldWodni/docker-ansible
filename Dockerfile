@@ -35,3 +35,5 @@ RUN ansible-galaxy install -r requirements.yaml
 # copy builtins
 COPY builtins builtins/
 
+# TODO: does not work from jenkins, try root
+USER root
