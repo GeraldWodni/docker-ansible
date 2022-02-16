@@ -64,8 +64,8 @@ spec:
         }
         stage("dockerpush") {
             container('docker') {
-                sh 'docker push ${REG_HOSTNAME}/${REG_FOLDER}/kern.js:b${BUILD_NUMBER}'
-                sh 'docker push ${REG_HOSTNAME}/${REG_FOLDER}/kern.js:latest'
+                sh 'docker push ${REG_HOSTNAME}/${REG_FOLDER}/ansible:b${BUILD_NUMBER}'
+                sh 'docker push ${REG_HOSTNAME}/${REG_FOLDER}/ansible:latest'
             }
         }
     }
