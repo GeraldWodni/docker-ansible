@@ -1,0 +1,27 @@
+---
+- name: Get Pods.
+
+  # although we are only using localhost, this is required
+  hosts: all
+
+  # important: use local connection instead of ssh 
+  connection: local
+  
+  tasks:
+    # get all pods from all namespaces
+    - name: Get pods.
+      kubernetes.core.k8s_info:
+        kind: Pod
+      register: pods
+
+    # show all pods and their images
+    # ignore all kube-* namespaces
+    - name: Show Pods.
+      debug:
+        msg: "{{ pod.spec.containers | map(attribute='image') | join(',') }}"
+      when:
+        - not pod.metadata.namespace.startswith("kube-")
+      loop: "{{ pods.resources }}"
+      loop_control:
+        loop_var: pod
+        label: "{{ pod.metadata.namespace }}/{{ pod.metadata.name }}"
