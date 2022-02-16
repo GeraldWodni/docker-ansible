@@ -5,7 +5,7 @@ MAINTAINER Gerald Wodni <gerald.wodni@gmail.com>
 
 # install packages
 RUN apk update && \
-    apk add ansible python3 \
+    apk add ansible python3 tar \
     rm -rf /var/cache/apk/*
 
 # ansible user
