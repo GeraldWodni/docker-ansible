@@ -23,3 +23,5 @@ COPY src/inventory.yaml /etc/ansible/inventory.yaml
 COPY src/requirements.yaml /home/ansible/requirements.yaml
 RUN ansible-galaxy install -r requirements.yaml
 
+# TODO: remove, only used to find required packets
+USER root

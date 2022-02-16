@@ -5,6 +5,9 @@ Run ansible directly in the cluster i.e. as deployment script after a successful
 Working directory is `/home/ansible`.
 The inventory is set to contain only `localhost` (as it is intended to run `kubernetes.core.k8s[_info]` packages)
 
+__Hint:__ use `connection: local` in your playbooks. Otherwise ansible will attempt to ssh into localhost.
+(If you know how to set this in ansible.cfg or the inventory, please let me know via issue)
+
 ### Environment variable `$PLAYBOOK`
 Runs `ansible-playbook $PLAYBOOK`
 
