@@ -18,9 +18,9 @@ RUN pip3 install \
     pyyaml
 
 # ansible user
-RUN addgroup -S ansible && adduser -S ansible -G ansible
-USER ansible
-WORKDIR /home/ansible
+#RUN addgroup -S ansible && adduser -S ansible -G ansible
+#USER ansible
+#WORKDIR /home/ansible
 
 # install entry
 COPY src/entry.sh /bin/entry.sh
@@ -29,11 +29,15 @@ ENTRYPOINT /bin/entry.sh
 # install ansible requirements
 COPY src/ansible.cfg /etc/ansible/ansible.cfg
 COPY src/inventory.yaml /etc/ansible/inventory.yaml
-COPY src/requirements.yaml /home/ansible/requirements.yaml
+
+RUN mkdir /ansible
+WORKDIR /ansible
+
+COPY src/requirements.yaml /requirements.yaml
 RUN ansible-galaxy install -r requirements.yaml
 
 # copy builtins
 COPY builtins builtins/
 
 # TODO: does not work from jenkins, try root
-USER root
+#USER root
