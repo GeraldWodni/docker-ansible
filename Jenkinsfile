@@ -34,6 +34,9 @@ spec:
             key: folder
   - name: docker-daemon
     image: docker:stable-dind
+    # https://liejuntao001.medium.com/fix-docker-in-docker-network-issue-in-kubernetes-cc18c229d9e5
+    args:
+    - "--mtu=1400"
     securityContext:
       privileged: true
     env:
