@@ -24,3 +24,11 @@ Runs `ansible-playbook main.yaml`.
 Runs `sleep $SLEEP`. Useful for debugging purposes.
 Use `kubectl exec -it -n <namespace> <podname> -- ash` to log into the instance and run ansible commands from there.
 
+## Builtins
+See `builtins` folder for built in yaml files.
+Some examples:
+
+### deletePodsByImage.yaml
+Delete all pods wich run `$TARGET_IMAGE` (env variable).
+Set `PLAYBOOK` to `builtin/deletePodsByImage.yaml`
+

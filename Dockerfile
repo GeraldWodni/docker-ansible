@@ -13,6 +13,7 @@ RUN apk update && apk add \
     rm -rf /var/cache/apk/*
 
 RUN pip3 install \
+    jmespath \
     openshift \
     pyyaml
 
@@ -31,5 +32,6 @@ COPY src/inventory.yaml /etc/ansible/inventory.yaml
 COPY src/requirements.yaml /home/ansible/requirements.yaml
 RUN ansible-galaxy install -r requirements.yaml
 
-# TODO: remove, only used to find required packets
-USER root
+# copy builtins
+COPY builtins builtins/
+

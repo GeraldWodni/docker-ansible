@@ -1,0 +1,30 @@
+---
+- name: Delete Pods by image.
+
+  # although we are only using localhost, this is required
+  hosts: all
+
+  # important: use local connection instead of ssh 
+  connection: local
+  
+  tasks:
+    # get all pods from all namespaces
+    - name: Get pods.
+      kubernetes.core.k8s_info:
+        kind: Pod
+      register: pods
+
+    - name: Delete Pods.
+      kubernetes.core.k8s:
+        state: absent
+        api_version: v1
+        kind: Pod
+        namespace: "{{ pod.metadata.namespace }}"
+        name: "{{ pod.metadata.name }}"
+      when:
+        - not pod.metadata.namespace.startswith("kube-")
+        - pod.spec.containers | selectattr('image', 'equalto', lookup('env','TARGET_IMAGE')) != []
+      loop: "{{ pods.resources }}"
+      loop_control:
+        loop_var: pod
+        label: "{{ pod.metadata.namespace }}/{{ pod.metadata.name }}"
