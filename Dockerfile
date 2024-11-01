@@ -6,16 +6,14 @@ MAINTAINER Gerald Wodni <gerald.wodni@gmail.com>
 # install packages
 RUN apk update && apk add \
     ansible \
+    py3-jmespath \
+    py3-kubernetes \
     py3-pip \
+    py3-pyaml \
     python3 \
     tar \
     vim \
     rm -rf /var/cache/apk/*
-
-RUN pip3 install \
-    jmespath \
-    openshift \
-    pyyaml
 
 # ansible user
 #RUN addgroup -S ansible && adduser -S ansible -G ansible
